@@ -2,6 +2,7 @@ module "openshift_platform" {
   source = "../.."
 
   upstream = true
+  region = "${var.region}"
   platform_name = "${var.platform_name}"
   key_pair_public_key_path = "${var.key_pair_public_key_path}"
   key_pair_private_key_path = "${var.key_pair_private_key_path}"
@@ -11,4 +12,5 @@ module "openshift_platform" {
   master_count = "${var.master_count}"
   platform_default_subdomain = "${var.platform_default_subdomain}"
   openshift_image_tag =  "v3.7.1"
+  route53_zone_public_id = "${var.route53_zone_public_id}"
 }

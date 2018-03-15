@@ -1,3 +1,5 @@
+variable "region" {}
+
 variable "platform_name" {}
 
 variable "platform_vpc_id" {}
@@ -16,7 +18,6 @@ variable "operator_cidrs" {
 
 variable "public_access_cidrs" {
   type = "list"
-  default = ["0.0.0.0/0"]
 }
 
 variable "master_public_dns_name" {

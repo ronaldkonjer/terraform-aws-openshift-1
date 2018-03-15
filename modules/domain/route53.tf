@@ -1,13 +1,13 @@
-resource "aws_route53_zone" "public" {
-  name = "${var.platform_default_subdomain}."
+# resource "aws_route53_zone" "public" {
+#   name = "${var.platform_default_subdomain}."
 
-  tags = "${map(
-    "kubernetes.io/cluster/${var.platform_name}", "owned"
-  )}"
-}
+#   tags = "${map(
+#     "kubernetes.io/cluster/${var.platform_name}", "owned"
+#   )}"
+# }
 
 resource "aws_route53_record" "platform_public" {
-  zone_id = "${aws_route53_zone.public.zone_id}"
+  zone_id = "${var.route53_zone_public_id}"
   name = "*.${var.platform_default_subdomain}"
   type = "A"
 
@@ -19,7 +19,7 @@ resource "aws_route53_record" "platform_public" {
 }
 
 resource "aws_route53_record" "master_public" {
-  zone_id = "${aws_route53_zone.public.zone_id}"
+  zone_id = "${var.route53_zone_public_id}"
   name = "${var.master_public_dns_name}"
   type = "A"
 
@@ -31,7 +31,7 @@ resource "aws_route53_record" "master_public" {
 }
 
 resource "aws_route53_record" "bastion_public" {
-  zone_id = "${aws_route53_zone.public.zone_id}"
+  zone_id = "${var.route53_zone_public_id}"
   name = "bastion.${var.platform_default_subdomain}"
   type = "A"
   ttl     = "30"
