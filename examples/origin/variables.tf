@@ -1,6 +1,6 @@
 variable "region" {
   description = "The region to deploy the cluster in, e.g: eu-west-2."
-  default = "eu-west-2"
+  default = "eu-west-1"
 }
 
 variable "platform_name" {
@@ -27,15 +27,16 @@ variable "public_access_cidrs" {
 }
 
 variable "infra_node_count" {
-  default = 1
+  default = 2
 }
 
 variable "master_count" {
-  default = 1
+  default = 2
 }
 
 variable "route53_zone_public_id" {
   default = "Z2CP8DRLO76FWF"
+}
 
 
 variable "master_spot_price" {
