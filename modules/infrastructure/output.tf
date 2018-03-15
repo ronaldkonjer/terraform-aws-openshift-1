@@ -21,3 +21,8 @@ output "master_lb_name" {
 output "master_private_dns_name" {
   value = "master.${var.platform_name}.internal"
 }
+
+output "platform_private_key" {
+  sensitive = true
+  value = "${data.tls_public_key.platform.private_key_pem}"
+}

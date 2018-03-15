@@ -7,6 +7,7 @@ variable "platform_name" {
   default="Openshift"
 }
 
+
 variable "key_pair_public_key_path" {
   default="~/.ssh/awscgkey.pub"
 }
@@ -35,6 +36,10 @@ variable "master_count" {
 
 variable "route53_zone_public_id" {
   default = "Z2CP8DRLO76FWF"
+
+
+variable "master_spot_price" {
+  default = ""
 }
 
 variable "platform_default_subdomain" {
