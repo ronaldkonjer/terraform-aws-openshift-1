@@ -3,6 +3,7 @@ module "openshift_platform" {
 
   upstream = true
   region = "${var.region}"
+  platform_vpc_id = "${var.platform_vpc_id}"
   platform_name = "${var.platform_name}"
   key_pair_private_key_path = "${var.key_pair_private_key_path}"
   operator_cidrs = "${var.operator_cidrs}"

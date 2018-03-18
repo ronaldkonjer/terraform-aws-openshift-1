@@ -3,7 +3,7 @@ module "domain" {
 
   region = "${var.region}"
   platform_name = "${var.platform_name}"
-  platform_vpc_id = "${module.network.platform_vpc_id}"
+  platform_vpc_id = "${var.platform_vpc_id}"
 
   bastion_ip = "${data.aws_instance.bastion.public_ip}"
 

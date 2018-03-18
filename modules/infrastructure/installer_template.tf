@@ -9,6 +9,7 @@ data "template_file" "inventory_template" {
     openshift_deployment_type = "${(var.upstream) ? "origin" : "openshift-enterprise"}"
     openshift_image_tag = "${var.openshift_image_tag}"
     openshift_major_version = "${var.openshift_major_version}"
+    dnsmasq_conf = "/home/centos/cg-dnsmasq.cfg"
   }
 }
 

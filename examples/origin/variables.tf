@@ -4,9 +4,12 @@ variable "region" {
 }
 
 variable "platform_name" {
-  default="Openshift"
+  default="openshift-ha"
 }
 
+variable "platform_vpc_id" {
+  default = "vpc-4fac482b"
+}
 
 variable "key_pair_public_key_path" {
   default="~/.ssh/awscgkey.pub"

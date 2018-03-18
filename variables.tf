@@ -10,6 +10,8 @@ variable "key_pair_private_key_path" {
   description = "AWS key pair that is used for instances of the cluster includes the bastion"
 }
 
+variable "platform_vpc_id" {}
+
 variable "platform_cidr" {
   default = "172.24.0.0/16"
 }

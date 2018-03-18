@@ -12,7 +12,12 @@ OSEv3:
     openshift_deployment_type: ${openshift_deployment_type}
     openshift_image_tag: "${openshift_image_tag}"
     openshift_pkg_version: "-${openshift_major_version}"
+    # debug_level: 4
     containerized: true
+    # openshift_docker_additional_registries: docker-CG.cgnet.nl
+    # openshift_docker_insecure_registries: ['172.30.0.0/16', 'docker-CG.cgnet.nl']
+    # openshift_docker_options: --log-driver=json-file --log-opt max-size=1M --log-opt max-file=3
+    # openshift_docker_selinux_enabled: true
     openshift_master_identity_providers:
       - name: 'test_identity_provider'
         login: true
@@ -40,10 +45,14 @@ OSEv3:
         - 'nodefs.inodesFree=1m30s'
         - 'imagefs.available=1m30s'
         - 'imagefs.inodesFree=1m30s'
-    openshift_disable_check: 'disk_availability,memory_availability'
+    openshift_disable_check: 'disk_availability,memory_availability,docker_storage,package_version,docker_image_availability'
     openshift_master_cluster_hostname: master.${platform_name}.internal
     openshift_master_cluster_public_hostname: ${master_public_dns_name}
     openshift_master_default_subdomain: ${platform_default_subdomain}
+    osm_custom_cors_origins: ['sc.*','s3.*']
+    openshift_node_dnsmasq_additional_config_file: ${dnsmasq_conf}
+    #openshift_repos_enable_testing: false
+    #openshift_master_identity_providers: [{'name': 'ldap_provider','challenge': 'true','login': 'true','kind': 'LDAPPasswordIdentityProvider','attributes': {'id': ['dn'],'email': ['mail'],'name': ['cn'],'preferredUsername': ['uid']},'bindDN': 'cn=Manager,dc=cgnet,dc=nl','bindPassword': 'J]Nd6dIS$]JD','insecure': 'true','url': 'ldap://zd005.cgnet.nl:389/cn=Manager,dc=cgnet,dc=nl?uid'}]
     openshift_cloudprovider_kind: aws
     openshift_clusterid: ${platform_name}
     openshift_hosted_prometheus_deploy: true

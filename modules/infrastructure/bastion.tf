@@ -37,6 +37,32 @@ resource "aws_instance" "bastion" {
   )}"
 }
 
+resource "null_resource" "dnsmasq_cfg" {
+  provisioner "file" {
+    source = "${path.module}/resources/cg-dnsmasq.cfg"
+    destination = "~/cg-dnsmasq.cfg"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod 644 ~/cg-dnsmasq.cfg",
+    ]
+  }
+
+  connection {
+    type = "ssh"
+    user = "${(var.upstream) ? "centos" : "ec2-user"}"
+    private_key = "${data.tls_public_key.platform.private_key_pem}"
+    host = "${aws_instance.bastion.public_ip}"
+  }
+
+  triggers = {
+    bastion_instance_id = "${aws_instance.bastion.id}"
+  }
+
+  depends_on = ["aws_instance.bastion"]
+}
+
 resource "null_resource" "openshift_platform_key" {
   provisioner "file" {
     content = "${data.tls_public_key.platform.private_key_pem}"

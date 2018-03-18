@@ -1,7 +1,7 @@
 # Private subnet: for instances / internal lb
 resource "aws_subnet" "private" {
   count = "${length(var.private_cidrs)}"
-  vpc_id = "${aws_vpc.platform.id}"
+  vpc_id = "${var.platform_vpc_id}"
   availability_zone = "${element(data.aws_availability_zones.available.names, count.index)}"
   cidr_block = "${element(var.private_cidrs, count.index)}"
 
@@ -27,7 +27,7 @@ resource "aws_eip" "private_gw" {
 
 # Private route table: attach NAT gw for outbounds.
 resource "aws_route_table" "private" {
-  vpc_id = "${aws_vpc.platform.id}"
+  vpc_id = "${var.platform_vpc_id}"
   tags = "${map(
     "kubernetes.io/cluster/${var.platform_name}", "owned",
     "Name", "${var.platform_name}-private-rt"
