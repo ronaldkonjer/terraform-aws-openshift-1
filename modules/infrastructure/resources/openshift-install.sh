@@ -12,7 +12,7 @@ export ANSIBLE_FORKS=20
 
 export AWS_REGION="${platform_aws_region}"
 
-ocinventory -cluster "${platform_name}" -inventory /etc/oc-inventory.yml > $HOME/inventory.yml
-ansible-playbook -i $HOME/inventory.yml /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml -vvv # uncomment for verbose! -vvv
+ocinventory -cluster "${platform_name}" -inventory /etc/oc-inventory.cfg > $HOME/inventory.cfg
+ansible-playbook -i $HOME/inventory.cfg /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml -vvv # uncomment for verbose! -vvv
 
 #ansible-playbook -i $HOME/inventory.yml /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml -vvv # uncomment for verbose! -vvv

@@ -1,5 +1,5 @@
 data "template_file" "inventory_template" {
-  template = "${file("${path.module}/resources/openshift-inventory.yml")}"
+  template = "${file("${path.module}/resources/openshift-inventory.cfg")}"
 
   vars {
     platform_name = "${var.platform_name}"
