@@ -20,7 +20,7 @@ resource "aws_iam_instance_profile" "bastion" {
 
 resource "aws_instance" "bastion" {
   ami = "${data.aws_ami.bastion.id}"
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
   subnet_id = "${element(data.aws_subnet.public.*.id, 0)}"
   associate_public_ip_address = true
   key_name = "${aws_key_pair.platform.id}"

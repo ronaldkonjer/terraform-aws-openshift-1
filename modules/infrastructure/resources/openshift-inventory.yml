@@ -48,7 +48,8 @@ OSEv3:
     openshift_disable_check: 'disk_availability,memory_availability,docker_storage,package_version,docker_image_availability'
     openshift_master_cluster_hostname: master.${platform_name}.internal
     openshift_master_cluster_public_hostname: ${master_public_dns_name}
-    openshift_master_default_subdomain: ${platform_default_subdomain}
+    #openshift_master_default_subdomain: ${platform_default_subdomain}
+    openshift_master_default_subdomain: apps.${platform_default_subdomain}
     osm_custom_cors_origins: ['sc.*','s3.*']
     openshift_node_dnsmasq_additional_config_file: ${dnsmasq_conf}
     #openshift_repos_enable_testing: false

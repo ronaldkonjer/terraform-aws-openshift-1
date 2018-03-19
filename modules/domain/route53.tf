@@ -8,7 +8,8 @@
 
 resource "aws_route53_record" "platform_public" {
   zone_id = "${var.route53_zone_public_id}"
-  name = "*.${var.platform_default_subdomain}"
+  #name = "*.${var.platform_default_subdomain}"
+  name = "*.apps.${var.platform_default_subdomain}"
   type = "A"
 
   alias {

@@ -29,7 +29,7 @@ variable "platform_default_subdomain" {
 }
 
 variable "platform_secure_listener" {
-  default = false
+  default = true
 }
 
 variable "key_pair_private_key" {

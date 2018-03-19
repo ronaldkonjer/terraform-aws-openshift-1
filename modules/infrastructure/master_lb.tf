@@ -3,6 +3,8 @@ resource "aws_elb" "master" {
   name = "${var.platform_name}-master-lb"
   internal = true
   subnets = ["${data.aws_subnet.private.*.id}"]
+  # load_balancer_type = "network"
+  # enable_cross_zone_load_balancing=true
   security_groups = [
     "${aws_security_group.node.id}"
   ]

@@ -3,6 +3,7 @@ resource "aws_lb" "master_public" {
   internal = false
   subnets = ["${data.aws_subnet.public.*.id}"]
   load_balancer_type = "network"
+  enable_cross_zone_load_balancing=true
 
   tags = "${map(
     "kubernetes.io/cluster/${var.platform_name}", "owned"

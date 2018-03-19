@@ -5,6 +5,8 @@ resource "aws_lb" "platform_public" {
   internal = false
   security_groups = ["${aws_security_group.platform_public.id}"]
   subnets = ["${data.aws_subnet.public.*.id}"]
+  load_balancer_type = "application"
+  enable_cross_zone_load_balancing=true
 
   tags = "${map(
     "kubernetes.io/cluster/${var.platform_name}", "owned"
@@ -32,7 +34,8 @@ resource "aws_lb_target_group" "platform_public_insecure" {
 
 data "aws_acm_certificate" "platform_public" {
   count = "${var.platform_secure_listener ? 1 : 0}"
-  domain = "*.${var.platform_default_subdomain}"
+  # domain = "*.${var.platform_default_subdomain}"
+  domain = "*.apps.${var.platform_default_subdomain}"
   statuses = ["ISSUED"]
 }
 
