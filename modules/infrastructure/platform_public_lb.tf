@@ -34,8 +34,8 @@ resource "aws_lb_target_group" "platform_public_insecure" {
 
 data "aws_acm_certificate" "platform_public" {
   count = "${var.platform_secure_listener ? 1 : 0}"
-  # domain = "*.${var.platform_default_subdomain}"
-  domain = "*.apps.${var.platform_default_subdomain}"
+  domain = "*.${var.platform_default_subdomain}"
+  # domain = "*.apps.${var.platform_default_subdomain}"
   statuses = ["ISSUED"]
 }
 
