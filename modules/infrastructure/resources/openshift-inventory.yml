@@ -14,10 +14,10 @@ OSEv3:
     openshift_pkg_version: "-${openshift_major_version}"
     # debug_level: 4
     containerized: true
-    # openshift_docker_additional_registries: docker-CG.cgnet.nl
-    # openshift_docker_insecure_registries: ['172.30.0.0/16', 'docker-CG.cgnet.nl']
-    # openshift_docker_options: --log-driver=json-file --log-opt max-size=1M --log-opt max-file=3
-    # openshift_docker_selinux_enabled: true
+    openshift_docker_additional_registries: ['docker-registry-default.cgcloud.eu', docker-CG.cgnet.nl']
+    openshift_docker_insecure_registries: ['172.30.0.0/16', 'docker-CG.cgnet.nl']
+    openshift_docker_options: --log-driver=json-file --log-opt max-size=1M --log-opt max-file=3
+    openshift_docker_selinux_enabled: true
     openshift_master_identity_providers:
       - name: 'test_identity_provider'
         login: true

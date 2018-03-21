@@ -30,11 +30,11 @@ variable "public_access_cidrs" {
 }
 
 variable "infra_node_count" {
-  default = 3
+  default = 2
 }
 
 variable "master_count" {
-  default = 3
+  default = 2
 }
 
 variable "route53_zone_public_id" {

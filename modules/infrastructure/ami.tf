@@ -4,7 +4,7 @@ data "aws_ami" "bastion" {
 
     filter {
         name   = "name"
-        values = ["${(var.upstream) ? "CentOS Linux 7 x86_64 HVM EBS *" : "RHEL-7.4_HVM_GA-????????-x86_64-*-Access2-*"}"]
+        values = ["${(var.upstream) ? "CentOS Linux 7 x86_64 HVM EBS 18*" : "RHEL-7.4_HVM_GA-????????-x86_64-*-Access2-*"}"]
     }
 
     filter {
@@ -24,7 +24,7 @@ data "aws_ami" "node" {
 
     filter {
         name   = "name"
-        values = ["${(var.upstream) ? "CentOS Linux 7 x86_64 HVM EBS *" : "RHEL-Atomic_7.4_HVM_GA-????????-x86_64-*"}"]
+        values = ["${(var.upstream) ? "CentOS Linux 7 x86_64 HVM EBS 18*" : "RHEL-Atomic_7.4_HVM_GA-????????-x86_64-*"}"]
     }
 
     filter {
