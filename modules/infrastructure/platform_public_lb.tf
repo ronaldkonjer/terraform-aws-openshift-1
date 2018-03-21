@@ -3,9 +3,9 @@
 resource "aws_lb" "platform_public" {
   name = "${var.platform_name}-public-lb"
   internal = false
-  security_groups = ["${aws_security_group.platform_public.id}"]
+  #security_groups = ["${aws_security_group.platform_public.id}"]
   subnets = ["${data.aws_subnet.public.*.id}"]
-  load_balancer_type = "application"
+  load_balancer_type = "network"
   enable_cross_zone_load_balancing=true
 
   tags = "${map(
@@ -16,7 +16,7 @@ resource "aws_lb" "platform_public" {
 resource "aws_lb_listener" "platform_public_insecure" {
   load_balancer_arn = "${aws_lb.platform_public.arn}"
   port = "80"
-  protocol = "HTTP"
+  protocol = "TCP"
 
   default_action {
     target_group_arn = "${aws_lb_target_group.platform_public_insecure.arn}"
@@ -27,7 +27,7 @@ resource "aws_lb_listener" "platform_public_insecure" {
 resource "aws_lb_target_group" "platform_public_insecure" {
   name = "${var.platform_name}-public-insecure"
   port = 80
-  protocol = "HTTP"
+  protocol = "TCP"
   deregistration_delay = 20
   vpc_id = "${data.aws_vpc.platform.id}"
 }
@@ -43,12 +43,20 @@ resource "aws_lb_listener" "platform_public" {
   count = "${data.aws_acm_certificate.platform_public.count}"
   load_balancer_arn = "${aws_lb.platform_public.arn}"
   port = "443"
-  protocol = "HTTPS"
-  ssl_policy = "ELBSecurityPolicy-2015-05"
-  certificate_arn   = "${data.aws_acm_certificate.platform_public.arn}"
+  protocol = "TCP"
+  # ssl_policy = "ELBSecurityPolicy-2015-05"
+  # certificate_arn   = "${data.aws_acm_certificate.platform_public.arn}"
 
   default_action {
-    target_group_arn = "${aws_lb_target_group.platform_public_insecure.arn}"
+    target_group_arn = "${aws_lb_target_group.platform_public_secure.arn}"
     type = "forward"
   }
+}
+
+resource "aws_lb_target_group" "platform_public_secure" {
+  name = "${var.platform_name}-public-secure"
+  port = 443
+  protocol = "TCP"
+  deregistration_delay = 20
+  vpc_id = "${data.aws_vpc.platform.id}"
 }

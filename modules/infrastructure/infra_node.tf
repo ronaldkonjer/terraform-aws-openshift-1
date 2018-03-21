@@ -47,7 +47,8 @@ resource "aws_autoscaling_group" "infra_node" {
   force_delete = true
   launch_configuration = "${aws_launch_configuration.infra_node.name}"
   target_group_arns = [
-    "${aws_lb_target_group.platform_public_insecure.arn}"
+    "${aws_lb_target_group.platform_public_insecure.arn}",
+    "${aws_lb_target_group.platform_public_secure.arn}"
   ]
 
   tag {

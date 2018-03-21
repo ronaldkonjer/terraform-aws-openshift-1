@@ -47,3 +47,33 @@ resource "aws_lb_target_group" "master_public_insecure" {
   deregistration_delay = 20
   vpc_id = "${data.aws_vpc.platform.id}"
 }
+
+
+# resource "aws_load_balancer_policy" "proxyprotocol-policy" {
+#   load_balancer_name = "${var.platform_name}-public-lb-classic"
+#   policy_name        = "${var.platform_name}-public-lb-ProxyProtocol-policy"
+#   policy_type_name   = "ProxyProtocolPolicyType"
+
+#   policy_attribute = {
+#     name  = "ProxyProtocol"
+#     value = "true"
+#   }
+# }
+
+# resource "aws_load_balancer_backend_server_policy" "public-lb-backend-auth-policies-80" {
+#   load_balancer_name = "${var.platform_name}-public-lb-classic"
+#   instance_port      = 80
+
+#   policy_names = [
+#     "${aws_load_balancer_policy.proxyprotocol-policy.policy_name}",
+#   ]
+# }
+
+# resource "aws_load_balancer_backend_server_policy" "public-lb-backend-auth-policies-443" {
+#   load_balancer_name = "${var.platform_name}-public-lb-classic"
+#   instance_port      = 443
+
+#   policy_names = [
+#     "${aws_load_balancer_policy.proxyprotocol-policy.policy_name}",
+#   ]
+# }
